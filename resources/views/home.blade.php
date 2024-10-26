@@ -8,21 +8,48 @@
 
     <!-- Añadir FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Incluir Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-100">
     <!-- Navbar -->
     <nav class="bg-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
+                <!-- Logo y nombre -->
                 <div class="flex items-center">
                     <img src="{{ asset('logo.png') }}" alt="Logo" class="h-8 w-auto">
                     <span class="ml-2 text-xl font-semibold">Portal de Gestión</span>
                 </div>
+
+                <!-- Menú de usuario -->
                 <div class="flex items-center space-x-4">
-                    <a href="/admin" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
-                        Dashboard
-                    </a>
-                    <a href="/admin" class="text-gray-700 hover:text-gray-900">Iniciar Sesión</a>
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                            <img src="{{ asset('default-avatar.png') }}" alt="Avatar" class="h-8 w-8 rounded-full">
+                            <span class="font-medium">{{ Auth::user()->name }}</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <!-- Menú desplegable -->
+                        <div x-show="open" 
+                             @click.away="open = false"
+                             x-transition
+                             class="absolute right-0 mt-2 w-48 py-2 bg-white rounded-md shadow-xl z-50">
+                            <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,6 +62,7 @@
             <p class="text-xl">Accede a toda la información y recursos disponibles</p>
         </div>
     </div>
+
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 py-8">

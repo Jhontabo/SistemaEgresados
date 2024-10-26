@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersonalInfo; // Asegúrate de tener el modelo correcto
 use Illuminate\Http\Request;
-use App\Models\PersonalInfo;
 
 class HomeController extends Controller
 {
-
-
     public function index()
     {
-        // Obtener la información personal desde la base de datos
-        $personalInfos = PersonalInfo::all();
 
-        // Pasar la variable a la vista
-        return view('home', ['personalInfos' => $personalInfos]);
+        $personalInfos = PersonalInfo::all();
+        $totalUsers = PersonalInfo::count(); // Ejemplo de conteo
+        $totalJobs = 0; // Añade la lógica correcta
+        $activeEvents = 0; // Añade la lógica correcta
+        $totalNews = 0; // Añade la lógica correcta
+
+        // Pasar los datos a la vista
+        return view('home', compact('personalInfos', 'totalUsers', 'totalJobs', 'activeEvents', 'totalNews'));
     }
 }
