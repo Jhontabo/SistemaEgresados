@@ -36,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ])
 
 
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+            #->plugin(FilamentSpatieRolesPermissionsPlugin::make())
 
 
 
