@@ -1,60 +1,56 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Muestra la vista de edición del perfil del usuario autenticado.
+     *
+     * @return \Illuminate\View\View
      */
-    public function edit(Request $request): View
+    public function edit()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        // Obtén el usuario autenticado
+        $user = Auth::user();
+
+        // Retorna la vista del perfil con los datos del usuario
+        return view('perfil.edit', compact('user'));
     }
 
     /**
-     * Update the user's profile information.
+     * Actualiza los datos del perfil del usuario autenticado.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        // Valida los datos del formulario
+        $request->validate([
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'residence' => 'required|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
         ]);
 
-        $user = $request->user();
+        // Obtén el usuario autenticado
+        $user = Auth::user();
 
-        Auth::logout();
+        // Actualiza los campos del perfil
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->residence = $request->input('residence');
+        $user->company = $request->input('company');
+        $user->position = $request->input('position');
 
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        // Redirige con un mensaje de éxito
+        return redirect()->route('perfil.edit')->with('success', 'Perfil actualizado con éxito.');
     }
 }

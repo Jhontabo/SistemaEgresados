@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
+
 Auth::routes();
 
 // Ruta de bienvenida para usuarios no autenticados
@@ -15,9 +16,9 @@ Route::get('/', function () {
 // Ruta para home, que solo es accesible para usuarios autenticados y verificados
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-// Opcional: Rutas del perfil de usuario si es necesario
+
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit');
+    Route::patch('/perfil', [ProfileController::class, 'update'])->name('perfil.update'); // Aquí defines la ruta para actualizar el perfil
 });
