@@ -16,6 +16,8 @@ Route::get('/', function () {
 // Ruta para home, que solo es accesible para usuarios autenticados y verificados
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
+Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit');
+Route::put('/perfil', [ProfileController::class, 'update'])->name('perfil.update');
 
 
 Route::middleware('auth')->group(function () {

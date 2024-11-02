@@ -3,45 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Egresados - Universidad Mariana</title>
+    <title>Sistemas de Egresados - Universidad Mariana</title>
     @vite('resources/css/app.css')
-
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-50" x-data="{ openMenu: false, openModal: false }">
-    <!-- Navbar -->
-    <nav class="bg-blue-900 text-white shadow-lg">
+    <!-- Navbar Mejorado -->
+    <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo y nombre -->
-                <div class="flex items-center">
-                    <img src="{{ asset('logo-unimar.png') }}" alt="Logo Universidad Mariana" class="h-12 w-auto">
-                    <span class="ml-3 text-xl font-semibold">Portal de Egresados UNIMAR</span>
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo y nombre con animación -->
+                <div class="flex items-center transform hover:scale-105 transition-transform duration-200">
+                    <img src="{{ asset('logo-unimar.png') }}" alt="Logo Universidad Mariana" class="h-14 w-auto">
+                    <div class="ml-3">
+                        <span class="text-2xl font-bold">Sistema de Egresados</span>
+                        <p class="text-sm text-blue-200">Universidad Mariana</p>
+                    </div>
                 </div>
 
-                <!-- Menú de usuario -->
+                <!-- Menú de usuario mejorado -->
                 <div class="relative" x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center space-x-2 text-white hover:text-gray-200 focus:outline-none" aria-expanded="open" aria-controls="user-menu">
-                        <img src="{{ asset('default-avatar.png') }}" alt="Avatar" class="h-8 w-8 rounded-full border-2 border-white">
-                        <span class="font-medium">{{ Auth::user()->name }}</span>
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <button @click="open = !open" class="flex items-center space-x-3 bg-blue-800 bg-opacity-50 rounded-full px-4 py-2 hover:bg-opacity-75 transition duration-200">
+                        <img src="{{ asset('default-avatar.png') }}" alt="Avatar" class="h-10 w-10 rounded-full border-2 border-white object-cover">
+                        <div class="text-left">
+                            <span class="block font-medium">{{ Auth::user()->name }}</span>
+                            <span class="text-xs text-blue-200">Egresado</span>
+                        </div>
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
 
-                    <!-- Dropdown -->
-                    <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-48 py-2 bg-white rounded-md shadow-xl z-50" id="user-menu">
-                        <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                    <!-- Dropdown mejorado -->
+                    <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" class="absolute right-0 mt-3 w-48 rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 py-1 z-50">
+                        <a href="/admin" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
+                            <i class="fas fa-tachometer-alt text-blue-600 mr-3"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="{{ route('perfil.edit') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
+                            <i class="fas fa-user text-blue-600 mr-3"></i>
+                            <span>Perfil</span>
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                            <button type="submit" class="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
+                                <i class="fas fa-sign-out-alt text-blue-600 mr-3"></i>
+                                <span>Cerrar Sesión</span>
                             </button>
                         </form>
                     </div>
@@ -50,155 +58,217 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-4xl font-bold mb-4">Bienvenido al Portal de Egresados</h1>
-            <p class="text-xl">Universidad Mariana - Formando profesionales con espíritu franciscano</p>
+    <!-- Hero Section Mejorado -->
+    <header class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-24">
+        <div class="absolute inset-0 bg-blue-900 opacity-20 pattern-grid-lg"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-6 leading-tight">Bienvenido al Sistema de Egresados</h1>
+                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Universidad Mariana - Formando profesionales con espíritu franciscano y compromiso social</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-200">
+                        Explorar Oportunidades
+                    </a>
+                    <a href="#" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-900 transition duration-200">
+                        Ver Eventos
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Stats Overview -->
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <main class="max-w-7xl mx-auto px-4 -mt-10 relative z-20">
+        <!-- Stats Overview Mejorado -->
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             @foreach ([
-                ['icon' => 'fa-user-graduate', 'label' => 'Egresados Registrados', 'value' => $totalUsers ?? 0, 'color' => 'blue'],
-                ['icon' => 'fa-briefcase', 'label' => 'Oportunidades Laborales', 'value' => $totalJobs ?? 0, 'color' => 'green'],
-                ['icon' => 'fa-calendar-alt', 'label' => 'Eventos UNIMAR', 'value' => $activeEvents ?? 0, 'color' => 'purple'],
-                ['icon' => 'fa-newspaper', 'label' => 'Noticias Institucionales', 'value' => $totalNews ?? 0, 'color' => 'red'],
+                ['icon' => 'fa-user-graduate', 'label' => 'Egresados Registrados', 'value' => $totalUsers ?? 0, 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600'],
+                ['icon' => 'fa-briefcase', 'label' => 'Oportunidades Laborales', 'value' => $totalJobs ?? 0, 'color' => 'green', 'gradient' => 'from-green-500 to-green-600'],
+                ['icon' => 'fa-calendar-alt', 'label' => 'Eventos UNIMAR', 'value' => $activeEvents ?? 0, 'color' => 'purple', 'gradient' => 'from-purple-500 to-purple-600'],
+                ['icon' => 'fa-newspaper', 'label' => 'Noticias Institucionales', 'value' => $totalNews ?? 0, 'color' => 'red', 'gradient' => 'from-red-500 to-red-600']
             ] as $stat)
-            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-{{ $stat['color'] }}-100 text-{{ $stat['color'] }}-800">
-                        <i class="fas {{ $stat['icon'] }} text-2xl"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-gray-500 text-sm">{{ $stat['label'] }}</h3>
-                        <p class="text-2xl font-semibold">{{ $stat['value'] }}</p>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <div class="bg-gradient-to-br {{ $stat['gradient'] }} p-4 rounded-lg text-white">
+                            <i class="fas {{ $stat['icon'] }} text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-gray-500 text-sm font-medium">{{ $stat['label'] }}</h3>
+                            <p class="text-3xl font-bold text-gray-800">{{ $stat['value'] }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
             @endforeach
         </section>
 
-        <!-- Latest News & Events -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-lg font-semibold mb-4 text-blue-900">Noticias UNIMAR</h2>
-                @forelse($news ?? [] as $newsItem)
-                    <article class="mb-4 pb-4 border-b last:border-b-0 hover:bg-gray-50 p-2 rounded">
-                        <h3 class="font-medium text-blue-800">{{ $newsItem->title }}</h3>
-                        <p class="text-gray-600 text-sm mt-1">{{ Str::limit($newsItem->content, 100) }}</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-gray-500 text-xs">{{ $newsItem->created_at->diffForHumans() }}</span>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Leer más →</a>
+        <!-- Latest News & Events Mejorado -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Noticias -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-900 to-blue-800 px-6 py-4">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i class="fas fa-newspaper mr-3"></i>Noticias UNIMAR
+                    </h2>
+                </div>
+                <div class="p-6">
+                    @forelse($news ?? [] as $newsItem)
+                        <article class="mb-6 last:mb-0">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-newspaper text-blue-600 text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-800 hover:text-blue-600 transition duration-200">
+                                        {{ $newsItem->title }}
+                                    </h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ Str::limit($newsItem->content, 100) }}</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-gray-500 text-xs">{{ $newsItem->created_at->diffForHumans() }}</span>
+                                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center">
+                                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    @empty
+                        <div class="text-center py-8">
+                            <i class="fas fa-newspaper text-gray-300 text-4xl mb-3"></i>
+                            <p class="text-gray-500">No hay noticias disponibles</p>
                         </div>
-                    </article>
-                @empty
-                    <p class="text-gray-500">No hay noticias disponibles</p>
-                @endforelse
+                    @endforelse
+                </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-lg font-semibold mb-4 text-blue-900">Eventos Institucionales</h2>
-                @forelse($events ?? [] as $event)
-                    <article class="mb-4 pb-4 border-b last:border-b-0 hover:bg-gray-50 p-2 rounded">
-                        <h3 class="font-medium text-blue-800">{{ $event->title }}</h3>
-                        <p class="text-gray-600 text-sm mt-1">{{ $event->description }}</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-gray-500 text-xs"><i class="far fa-calendar mr-1"></i>{{ $event->start_date }}</span>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Ver detalles →</a>
+            <!-- Eventos -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-purple-900 to-purple-800 px-6 py-4">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i class="fas fa-calendar-alt mr-3"></i>Eventos Institucionales
+                    </h2>
+                </div>
+                <div class="p-6">
+                    @forelse($events ?? [] as $event)
+                        <article class="mb-6 last:mb-0">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-calendar-alt text-purple-600 text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-800 hover:text-purple-600 transition duration-200">
+                                        {{ $event->title }}
+                                    </h3>
+                                    <p class="text-gray-600 text-sm mt-1">{{ $event->description }}</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-purple-600 text-xs flex items-center">
+                                            <i class="far fa-calendar mr-1"></i>{{ $event->start_date }}
+                                        </span>
+                                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm font-medium inline-flex items-center">
+                                            Ver detalles <i class="fas fa-arrow-right ml-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    @empty
+                        <div class="text-center py-8">
+                            <i class="fas fa-calendar-alt text-gray-300 text-4xl mb-3"></i>
+                            <p class="text-gray-500">No hay eventos próximos</p>
                         </div>
-                    </article>
-                @empty
-                    <p class="text-gray-500">No hay eventos próximos</p>
-                @endforelse
+                    @endforelse
+                </div>
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white mt-12">
-        <div class="max-w-7xl mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer class="bg-gradient-to-br from-blue-900 to-blue-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Universidad Mariana</h3>
-                    <p class="text-gray-300">Formando profesionales íntegros con espíritu franciscano, comprometidos con el servicio y la excelencia.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white">Inicio</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Bolsa de Empleo</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Eventos Académicos</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Educación Continua</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Directorio de Egresados</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>Calle 18 No. 34-104 Pasto, Nariño</li>
-                        <li class="flex items-center"><i class="fas fa-phone mr-2"></i>+57 (602) 7244460</li>
-                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i>egresados@umariana.edu.co</li>
-                        <li class="flex items-center"><i class="fas fa-globe mr-2"></i>www.umariana.edu.co</li>
-                    </ul>
-                    <div class="mt-4 flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin-in text-xl"></i></a>
+                    <div class="flex items-center mb-6">
+                        <img src="{{ asset('logo-unimar.png') }}" alt="Logo" class="h-12 w-auto mr-3">
+                        <div>
+                            <h3 class="text-xl font-bold">Universidad Mariana</h3>
+                            <p class="text-blue-200 text-sm">Portal de Egresados</p>
+                        </div>
                     </div>
+                    <p class="text-blue-100">Formando profesionales íntegros con espíritu franciscano, comprometidos con el servicio y la excelencia.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Enlaces Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-chevron-right mr-2 text-xs"></i>Inicio
+                        </a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-chevron-right mr-2 text-xs"></i>Bolsa de Empleo
+                        </a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-chevron-right mr-2 text-xs"></i>Eventos Académicos
+                        </a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-chevron-right mr-2 text-xs"></i>Noticias
+                        </a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-chevron-right mr-2 text-xs"></i>Perfil
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contacto</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-blue-100">
+                            <i class="fas fa-map-marker-alt w-5 mr-2"></i>
+                            Calle 18 No. 34-104, San Juan de Pasto, Colombia
+                        </li>
+                        <li class="flex items-center text-blue-100">
+                            <i class="fas fa-phone w-5 mr-2"></i>
+                            +57 (602) 7244460
+                        </li>
+                        <li class="flex items-center text-blue-100">
+                            <i class="fas fa-envelope w-5 mr-2"></i>
+                            egresados@umariana.edu.co
+                        </li>
+                        <li class="mt-4">
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-facebook-f text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-twitter text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-linkedin-in text-xl"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="border-t border-blue-800 mt-8 pt-8 text-center text-gray-300">
-                <p>&copy; {{ date('Y') }} Universidad Mariana - Portal de Egresados. Todos los derechos reservados.</p>
+
+            <div class="border-t border-blue-700 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-blue-200 text-sm">
+                        © {{ date('Y') }} Universidad Mariana. Todos los derechos reservados.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-blue-200 hover:text-white text-sm">Política de Privacidad</a>
+                        <a href="#" class="text-blue-200 hover:text-white text-sm">Términos de Uso</a>
+                        <a href="#" class="text-blue-200 hover:text-white text-sm">Mapa del Sitio</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
-
-    <!-- Modal de Actualización de Datos -->
-    <div x-show="openModal" class="fixed inset-0 z-50 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="openModal = false"></div>
-
-            <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full">
-                <div class="bg-blue-900 px-6 py-4">
-                    <h3 class="text-lg font-medium text-white">Actualización de Datos</h3>
-                </div>
-
-                <form class="p-6">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Teléfono Actual</label>
-                        <input type="tel" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Correo Electrónico Personal</label>
-                        <input type="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </div>
-
-                    <div class="flex justify-end">
-                        <button type="button" @click="openModal = false" class="mr-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Cancelar
-                        </button>
-                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-900 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Actualizar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-        // Inicialización de Alpine.js para las pestañas y el modal
-        Alpine.data('tabs', () => ({
-            activeTab: 'personal',
-            switchTab(tab) { this.activeTab = tab }
-        }));
-    </script>
 </body>
 </html>

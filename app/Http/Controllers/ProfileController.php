@@ -1,56 +1,48 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use \App\Models\User;
 
 class ProfileController extends Controller
 {
-    /**
-     * Muestra la vista de edición del perfil del usuario autenticado.
-     *
-     * @return \Illuminate\View\View
-     */
+    // Mostrar la página de edición de perfil
     public function edit()
     {
-        // Obtén el usuario autenticado
         $user = Auth::user();
-
-        // Retorna la vista del perfil con los datos del usuario
         return view('perfil.edit', compact('user'));
     }
 
-    /**
-     * Actualiza los datos del perfil del usuario autenticado.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    // Actualizar los datos del perfil
     public function update(Request $request)
     {
-        // Valida los datos del formulario
         $request->validate([
-            'phone' => 'required|string|max:15',
-            'email' => 'required|email|max:255',
-            'residence' => 'required|string|max:255',
-            'company' => 'nullable|string|max:255',
-            'position' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
+            'telefono' => 'nullable|string|max:20',
+            'titulo' => 'nullable|string|max:255',
+            'institucion' => 'nullable|string|max:255',
+            'empresa' => 'nullable|string|max:255',
+            'cargo' => 'nullable|string|max:255',
+            'fecha_inicio' => 'nullable|date',
+            'estado_laboral' => 'nullable|string',
         ]);
 
-        // Obtén el usuario autenticado
+        /** @var \App\Models\User $user */
         $user = Auth::user();
+        $user->fill($request->only([
+            'name',
+            'telefono',
+            'titulo',
+            'institucion',
+            'empresa',
+            'cargo',
+            'fecha_inicio',
+            'estado_laboral'
+        ]));
+        $user->save();
 
-        // Actualiza los campos del perfil
-        $user->phone = $request->input('phone');
-        $user->email = $request->input('email');
-        $user->residence = $request->input('residence');
-        $user->company = $request->input('company');
-        $user->position = $request->input('position');
-
-        // Redirige con un mensaje de éxito
-        return redirect()->route('perfil.edit')->with('success', 'Perfil actualizado con éxito.');
+        return redirect()->route('perfil.edit')->with('status', 'Perfil actualizado con éxito.');
     }
 }
