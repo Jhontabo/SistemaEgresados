@@ -34,7 +34,7 @@
                         </div>
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a 1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                 clip-rule="evenodd" />
                         </svg>
                     </button>
@@ -75,16 +75,6 @@
                 <h1 class="text-5xl font-bold mb-6 leading-tight">Bienvenido al Sistema de Egresados</h1>
                 <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Universidad Mariana - Formando profesionales con
                     espíritu franciscano y compromiso social</p>
-                <div class="flex justify-center space-x-4">
-                    <a href="#"
-                        class="bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-200">
-                        Explorar Oportunidades
-                    </a>
-                    <a href="#"
-                        class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-900 transition duration-200">
-                        Ver Noticias
-                    </a>
-                </div>
             </div>
         </div>
     </header>
@@ -92,26 +82,22 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 -mt-10 relative z-20">
         <!-- Stats Overview Mejorado -->
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-12 text-center">
             @foreach ([['icon' => 'fa-user-graduate', 'label' => 'Egresados Registrados', 'value' => $totalUsers ?? 0, 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600'], ['icon' => 'fa-briefcase', 'label' => 'Oportunidades Laborales', 'value' => $totalJobs ?? 0, 'color' => 'green', 'gradient' => 'from-green-500 to-green-600'], ['icon' => 'fa-newspaper', 'label' => 'Noticias Institucionales', 'value' => $totalNews ?? 0, 'color' => 'red', 'gradient' => 'from-red-500 to-red-600']] as $stat)
                 <div
                     class="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <div class="bg-gradient-to-br {{ $stat['gradient'] }} p-4 rounded-lg text-white">
-                                <i class="fas {{ $stat['icon'] }} text-2xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-gray-500 text-sm font-medium">{{ $stat['label'] }}</h3>
-                                <p class="text-3xl font-bold text-gray-800">{{ $stat['value'] }}</p>
-                            </div>
+                    <div class="p-6 flex flex-col items-center">
+                        <div class="bg-gradient-to-br {{ $stat['gradient'] }} p-4 rounded-lg text-white mb-4">
+                            <i class="fas {{ $stat['icon'] }} text-2xl"></i>
                         </div>
+                        <h3 class="text-gray-500 text-sm font-medium">{{ $stat['label'] }}</h3>
+                        <p class="text-3xl font-bold text-gray-800">{{ $stat['value'] }}</p>
                     </div>
                 </div>
             @endforeach
         </section>
 
-        <!-- Latest News & Jobs Mejorado -->
+        <!-- Noticias y Ofertas Laborales -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <!-- Noticias -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -196,93 +182,6 @@
             </div>
         </section>
     </main>
-
-    <footer class="bg-gradient-to-br from-blue-900 to-blue-800 text-white mt-12">
-        <div class="max-w-7xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <img src="{{ asset('logo-unimar.png') }}" alt="Logo" class="h-12 w-auto mr-3">
-                        <div>
-                            <h3 class="text-xl font-bold">Universidad Mariana</h3>
-                            <p class="text-blue-200 text-sm">Portal de Egresados</p>
-                        </div>
-                    </div>
-                    <p class="text-blue-100">Formando profesionales íntegros con espíritu franciscano, comprometidos
-                        con el servicio y la excelencia.</p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold mb-6">Enlaces Rápidos</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#"
-                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
-                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Inicio
-                            </a></li>
-                        <li><a href="#"
-                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
-                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Bolsa de Empleo
-                            </a></li>
-                        <li><a href="#"
-                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
-                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Noticias
-                            </a></li>
-                        <li><a href="#"
-                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
-                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Perfil
-                            </a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-bold mb-6">Contacto</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center text-blue-100">
-                            <i class="fas fa-map-marker-alt w-5 mr-2"></i>
-                            Calle 18 No. 34-104, San Juan de Pasto, Colombia
-                        </li>
-                        <li class="flex items-center text-blue-100">
-                            <i class="fas fa-phone w-5 mr-2"></i>
-                            +57 (602) 7244460
-                        </li>
-                        <li class="flex items-center text-blue-100">
-                            <i class="fas fa-envelope w-5 mr-2"></i>
-                            egresados@umariana.edu.co
-                        </li>
-                        <li class="mt-4">
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
-                                    <i class="fab fa-facebook-f text-xl"></i>
-                                </a>
-                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
-                                    <i class="fab fa-twitter text-xl"></i>
-                                </a>
-                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
-                                    <i class="fab fa-instagram text-xl"></i>
-                                </a>
-                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
-                                    <i class="fab fa-linkedin-in text-xl"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-blue-700 mt-12 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-blue-200 text-sm">
-                        © {{ date('Y') }} Universidad Mariana. Todos los derechos reservados.
-                    </p>
-                    <div class="flex space-x-6 mt-4 md:mt-0">
-                        <a href="#" class="text-blue-200 hover:text-white text-sm">Política de Privacidad</a>
-                        <a href="#" class="text-blue-200 hover:text-white text-sm">Términos de Uso</a>
-                        <a href="#" class="text-blue-200 hover:text-white text-sm">Mapa del Sitio</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 
 </html>
