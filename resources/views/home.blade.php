@@ -182,6 +182,97 @@
             </div>
         </section>
     </main>
+
+    <footer class="bg-gradient-to-br from-blue-900 to-blue-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <img src="{{ asset('logo-unimar.png') }}" alt="Logo" class="h-12 w-auto mr-3">
+                        <div>
+                            <h3 class="text-xl font-bold">Universidad Mariana</h3>
+                            <p class="text-blue-200 text-sm">Portal de Egresados</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100">Formando profesionales íntegros con espíritu franciscano, comprometidos
+                        con el servicio y la excelencia.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Enlaces Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Inicio
+                            </a></li>
+                        <li><a href="#"
+                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Bolsa de Empleo
+                            </a></li>
+                        <li><a href="#"
+                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Eventos Académicos
+                            </a></li>
+                        <li><a href="#"
+                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Noticias
+                            </a></li>
+                        <li><a href="#"
+                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
+                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Perfil
+                            </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contacto</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-blue-100">
+                            <i class="fas fa-map-marker-alt w-5 mr-2"></i>
+                            Calle 18 No. 34-104, San Juan de Pasto, Colombia
+                        </li>
+                        <li class="flex items-center text-blue-100">
+                            <i class="fas fa-phone w-5 mr-2"></i>
+                            +57 (602) 7244460
+                        </li>
+                        <li class="flex items-center text-blue-100">
+                            <i class="fas fa-envelope w-5 mr-2"></i>
+                            egresados@umariana.edu.co
+                        </li>
+                        <li class="mt-4">
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-facebook-f text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-twitter text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-100 hover:text-white transition duration-200">
+                                    <i class="fab fa-linkedin-in text-xl"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-blue-700 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-blue-200 text-sm">
+                        © {{ date('Y') }} Universidad Mariana. Todos los derechos reservados.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-blue-200 hover:text-white text-sm">Política de Privacidad</a>
+                        <a href="#" class="text-blue-200 hover:text-white text-sm">Términos de Uso</a>
+                        <a href="#" class="text-blue-200 hover:text-white text-sm">Mapa del Sitio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
