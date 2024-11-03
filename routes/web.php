@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\OfertaLaboralController;
 
 Auth::routes();
 
@@ -21,8 +22,20 @@ Route::get('/noticias', [NoticiaController::class, 'index']);
 
 Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias.show');
 
+
+Route::get('/ofertas', [OfertaLaboralController::class, 'index'])->name('ofertas.index');
+
+Route::get('/ofertas/{id}', [OfertaLaboralController::class, 'show'])->name('ofertas.show');
+
+
+Route::get('/dashboard', function () {
+    return redirect()->route('home');
+})->name('dashboard');
+
+
+
 // Perfil de usuario
 Route::middleware('auth')->group(function () {
-    Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit');
-    Route::patch('/perfil', [ProfileController::class, 'update'])->name('perfil.update');
+    Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit'); // Cambiar el nombre aquí
+    Route::match(['put', 'patch'], '/perfil', [ProfileController::class, 'update'])->name('perfil.update');
 });

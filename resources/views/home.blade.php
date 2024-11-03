@@ -15,7 +15,6 @@
     <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo y nombre con animación -->
                 <div class="flex items-center transform hover:scale-105 transition-transform duration-200">
                     <img src="{{ asset('logo-unimar.png') }}" alt="Logo Universidad Mariana" class="h-14 w-auto">
                     <div class="ml-3">
@@ -24,7 +23,6 @@
                     </div>
                 </div>
 
-                <!-- Menú de usuario mejorado -->
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex items-center space-x-3 bg-blue-800 bg-opacity-50 rounded-full px-4 py-2 hover:bg-opacity-75 transition duration-200">
@@ -41,7 +39,6 @@
                         </svg>
                     </button>
 
-                    <!-- Dropdown mejorado -->
                     <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-200"
                         x-transition:enter-start="opacity-0 transform scale-95"
                         x-transition:enter-end="opacity-100 transform scale-100"
@@ -85,7 +82,7 @@
                     </a>
                     <a href="#"
                         class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-900 transition duration-200">
-                        Ver Eventos
+                        Ver Noticias
                     </a>
                 </div>
             </div>
@@ -96,7 +93,7 @@
     <main class="max-w-7xl mx-auto px-4 -mt-10 relative z-20">
         <!-- Stats Overview Mejorado -->
         <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            @foreach ([['icon' => 'fa-user-graduate', 'label' => 'Egresados Registrados', 'value' => $totalUsers ?? 0, 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600'], ['icon' => 'fa-briefcase', 'label' => 'Oportunidades Laborales', 'value' => $totalJobs ?? 0, 'color' => 'green', 'gradient' => 'from-green-500 to-green-600'], ['icon' => 'fa-calendar-alt', 'label' => 'Eventos UNIMAR', 'value' => $activeEvents ?? 0, 'color' => 'purple', 'gradient' => 'from-purple-500 to-purple-600'], ['icon' => 'fa-newspaper', 'label' => 'Noticias Institucionales', 'value' => $totalNews ?? 0, 'color' => 'red', 'gradient' => 'from-red-500 to-red-600']] as $stat)
+            @foreach ([['icon' => 'fa-user-graduate', 'label' => 'Egresados Registrados', 'value' => $totalUsers ?? 0, 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600'], ['icon' => 'fa-briefcase', 'label' => 'Oportunidades Laborales', 'value' => $totalJobs ?? 0, 'color' => 'green', 'gradient' => 'from-green-500 to-green-600'], ['icon' => 'fa-newspaper', 'label' => 'Noticias Institucionales', 'value' => $totalNews ?? 0, 'color' => 'red', 'gradient' => 'from-red-500 to-red-600']] as $stat)
                 <div
                     class="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                     <div class="p-6">
@@ -114,26 +111,19 @@
             @endforeach
         </section>
 
-
-        <p>Total de noticias: {{ $totalNews }}</p>
-
-
-
-        <!-- Latest News & Events Mejorado -->
+        <!-- Latest News & Jobs Mejorado -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <!-- Noticias --><!-- Noticias -->
+            <!-- Noticias -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="bg-gradient-to-r from-blue-900 to-blue-800 px-6 py-4">
                     <h2 class="text-xl font-bold text-white flex items-center">
                         <i class="fas fa-newspaper mr-3"></i>Noticias UNIMAR
                     </h2>
-
                 </div>
                 <div class="p-6">
                     @forelse($news as $newsItem)
                         <article class="mb-6 last:mb-0">
                             <div class="flex items-start space-x-4">
-                                <!-- Imagen de la noticia -->
                                 <img src="{{ $newsItem->imagen }}" alt="Imagen de la noticia"
                                     class="w-16 h-16 rounded-lg object-cover">
                                 <div class="flex-1">
@@ -148,7 +138,6 @@
                                             class="text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center">
                                             Leer más <i class="fas fa-arrow-right ml-2"></i>
                                         </a>
-
                                     </div>
                                 </div>
                             </div>
@@ -162,35 +151,35 @@
                 </div>
             </div>
 
-
-            <!-- Eventos -->
+            <!-- Ofertas Laborales -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-900 to-purple-800 px-6 py-4">
+                <div class="bg-gradient-to-r from-green-900 to-green-800 px-6 py-4">
                     <h2 class="text-xl font-bold text-white flex items-center">
-                        <i class="fas fa-calendar-alt mr-3"></i>Eventos Institucionales
+                        <i class="fas fa-briefcase mr-3"></i>Ofertas Laborales
                     </h2>
                 </div>
                 <div class="p-6">
-                    @forelse($events ?? [] as $event)
+                    @forelse($jobs as $job)
                         <article class="mb-6 last:mb-0">
                             <div class="flex items-start space-x-4">
                                 <div class="flex-shrink-0">
-                                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-calendar-alt text-purple-600 text-xl"></i>
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-briefcase text-green-600 text-xl"></i>
                                     </div>
                                 </div>
                                 <div class="flex-1">
                                     <h3
-                                        class="font-semibold text-gray-800 hover:text-purple-600 transition duration-200">
-                                        {{ $event->title }}
+                                        class="font-semibold text-gray-800 hover:text-green-600 transition duration-200">
+                                        {{ $job->titulo }}
                                     </h3>
-                                    <p class="text-gray-600 text-sm mt-1">{{ $event->description }}</p>
+                                    <p class="text-gray-600 text-sm mt-1">{{ Str::limit($job->descripcion, 100) }}</p>
                                     <div class="flex items-center justify-between mt-2">
-                                        <span class="text-purple-600 text-xs flex items-center">
-                                            <i class="far fa-calendar mr-1"></i>{{ $event->start_date }}
+                                        <span class="text-green-600 text-xs flex items-center">
+                                            <i
+                                                class="far fa-calendar mr-1"></i>{{ $job->fecha_publicacion->format('d-m-Y') }}
                                         </span>
-                                        <a href="#"
-                                            class="text-purple-600 hover:text-purple-800 text-sm font-medium inline-flex items-center">
+                                        <a href="{{ route('ofertas.show', $job->id) }}"
+                                            class="text-green-600 hover:text-green-800 text-sm font-medium inline-flex items-center">
                                             Ver detalles <i class="fas fa-arrow-right ml-2"></i>
                                         </a>
                                     </div>
@@ -199,14 +188,15 @@
                         </article>
                     @empty
                         <div class="text-center py-8">
-                            <i class="fas fa-calendar-alt text-gray-300 text-4xl mb-3"></i>
-                            <p class="text-gray-500">No hay eventos próximos</p>
+                            <i class="fas fa-briefcase text-gray-300 text-4xl mb-3"></i>
+                            <p class="text-gray-500">No hay ofertas laborales disponibles</p>
                         </div>
                     @endforelse
                 </div>
             </div>
         </section>
     </main>
+
     <footer class="bg-gradient-to-br from-blue-900 to-blue-800 text-white mt-12">
         <div class="max-w-7xl mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -232,10 +222,6 @@
                         <li><a href="#"
                                 class="text-blue-100 hover:text-white transition duration-200 flex items-center">
                                 <i class="fas fa-chevron-right mr-2 text-xs"></i>Bolsa de Empleo
-                            </a></li>
-                        <li><a href="#"
-                                class="text-blue-100 hover:text-white transition duration-200 flex items-center">
-                                <i class="fas fa-chevron-right mr-2 text-xs"></i>Eventos Académicos
                             </a></li>
                         <li><a href="#"
                                 class="text-blue-100 hover:text-white transition duration-200 flex items-center">
