@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\NoticiaController;
 
 Auth::routes();
 
@@ -13,14 +13,16 @@ Route::get('/', function () {
     return view('welcome');  // Vista welcome para la página inicial
 })->name('welcome');
 
-// Ruta para home, que solo es accesible para usuarios autenticados y verificados
+// Ruta para home, accesible solo para usuarios autenticados y verificados
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit');
-Route::put('/perfil', [ProfileController::class, 'update'])->name('perfil.update');
+// Rutas para las noticias
+Route::get('/noticias', [NoticiaController::class, 'index']);
 
+Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias.show');
 
+// Perfil de usuario
 Route::middleware('auth')->group(function () {
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit');
-    Route::patch('/perfil', [ProfileController::class, 'update'])->name('perfil.update'); // Aquí defines la ruta para actualizar el perfil
+    Route::patch('/perfil', [ProfileController::class, 'update'])->name('perfil.update');
 });
