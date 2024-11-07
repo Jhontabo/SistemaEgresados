@@ -43,11 +43,16 @@
                         x-transition:enter-start="opacity-0 transform scale-95"
                         x-transition:enter-end="opacity-100 transform scale-100"
                         class="absolute right-0 mt-3 w-48 rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 py-1 z-50">
-                        <a href="/admin"
-                            class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
-                            <i class="fas fa-tachometer-alt text-blue-600 mr-3"></i>
-                            <span>Dashboard</span>
-                        </a>
+
+                        @if (auth()->user()->roles->pluck('name')->contains('Admin') ||
+                                auth()->user()->roles->pluck('name')->contains('Docente'))
+                            <a href="/admin"
+                                class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
+                                <i class="fas fa-tachometer-alt text-blue-600 mr-3"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        @endif
+
                         <a href="{{ route('perfil.edit') }}"
                             class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
                             <i class="fas fa-user text-blue-600 mr-3"></i>

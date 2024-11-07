@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\NoticiaResource\Pages;
 use App\Models\Noticia;
+use App\Models\User; // Importa el modelo de usuario
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
@@ -44,11 +45,7 @@ class NoticiaResource extends Resource
                             ->label('Autor')
                             ->searchable()
                             ->options(function () {
-                                return Noticia::query()
-                                    ->select('autor')
-                                    ->distinct()
-                                    ->pluck('autor', 'autor')
-                                    ->toArray();
+                                return User::all()->pluck('name', 'id'); // Cargar la lista de usuarios como autores
                             })
                             ->placeholder('Selecciona o busca un autor'),
 
@@ -65,10 +62,19 @@ class NoticiaResource extends Resource
                             ->required()
                             ->label('Contenido')
                             ->disableToolbarButtons([
-                                'strike',
-                                'code',
+                                'bold',
+                                'italic',
+                                'underline',
+                                'h2',        // Encabezado 2
+                                'h3',        // Encabezado 3
+                                'bulletList', // Lista con viñetas
+                                'numberList', // Lista numerada
+                                'quote',     // Cita
+                                'codeBlock',
                             ])
+
                             ->placeholder('Escribe el contenido aquí...'),
+
                     ])
                     ->columns(1) // Contenido en una sola columna completa
             ]);

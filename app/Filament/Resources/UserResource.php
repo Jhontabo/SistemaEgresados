@@ -12,27 +12,40 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextInputColumn;
 use Spatie\Permission\Models\Role;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group'; // Puedes cambiar el icono.
+    protected static ?string $navigationLabel = 'Usuarios';
 
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->label('Nombre'),
-                Forms\Components\TextInput::make('email')
+
+                TextInput::make('email')
                     ->email()
                     ->required()
                     ->label('Correo Electrónico'),
-                Forms\Components\Select::make('roles')
+
+                TextInput::make('password')
+                    ->password()
+                    ->label('Contraseña')
+                    ->required(fn($context) => $context === 'create') // Requerido solo en creación
+                    ->minLength(8)
+                    ->dehydrateStateUsing(fn($state) => bcrypt($state)), // Encriptar la contraseña antes de guardarla
+
+                Select::make('roles')
                     ->relationship('roles', 'name')
                     ->options(Role::all()->pluck('name', 'id')) // Cargar la lista de roles
                     ->label('Roles')
@@ -40,7 +53,6 @@ class UserResource extends Resource
                     ->searchable(), // Habilitar búsqueda en el select
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
