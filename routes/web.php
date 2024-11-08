@@ -29,7 +29,7 @@ Route::get('/ofertas/{id}', [OfertaLaboralController::class, 'show'])->name('ofe
 
 
 Route::get('/dashboard', function () {
-    return redirect()->route('home');
+    return redirect()->route('dashboard');
 })->name('dashboard');
 
 
