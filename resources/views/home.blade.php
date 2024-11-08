@@ -44,7 +44,7 @@
                         x-transition:enter-end="opacity-100 transform scale-100"
                         class="absolute right-0 mt-3 w-48 rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 py-1 z-50">
 
-                        <a href="/admin"
+                        <a href="/dashboard"
                             class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition duration-200">
                             <i class="fas fa-tachometer-alt text-blue-600 mr-3"></i>
                             <span>Dashboard</span>
