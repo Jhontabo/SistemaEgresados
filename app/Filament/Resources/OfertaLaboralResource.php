@@ -24,7 +24,7 @@ class OfertaLaboralResource extends Resource
 {
     protected static ?string $model = OfertaLaboral::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'hugeicons-permanent-job';
     protected static ?string $navigationLabel = 'Ofertas laborales';
 
     public static function form(Form $form): Form

@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "afatmustafa/blade-hugeicons": "^0.0.3",
         "althinect/filament-spatie-roles-permissions": "*",
         "doctrine/dbal": "^4.2",
         "filament/filament": "^3.2",
