@@ -26,10 +26,10 @@ class RoleResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Nombre'),
                 Forms\Components\TextInput::make('guard_name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Guardian'),
             ]);
     }
 
@@ -38,9 +38,11 @@ class RoleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Nombre'),
                 Tables\Columns\TextColumn::make('guard_name')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Guardian'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
