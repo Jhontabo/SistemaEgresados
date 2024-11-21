@@ -7,7 +7,7 @@ use App\Models\Noticia;
 use App\Models\OfertaLaboral; // Importar el modelo de ofertas laborales
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
@@ -26,6 +26,6 @@ class HomeController extends Controller
         // Obtener las últimas ofertas laborales
         $jobs = OfertaLaboral::latest()->take(5)->get();
 
-        return view('home', compact('totalUsers', 'totalNews', 'totalJobs', 'news', 'jobs'));
+        return view('dashboard', compact('totalUsers', 'totalNews', 'totalJobs', 'news', 'jobs'));
     }
 }
